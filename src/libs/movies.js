@@ -1,0 +1,5 @@
+
+window.movies = [
+    'avatar',
+    'grease'
+];

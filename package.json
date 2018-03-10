@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "description": "Game party movies",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm i && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "git": "https://github.com/Oyola1987/movie-party"
+  },
+  "author": "Jose Oyola",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "4.16.2",
+    "lodash": "4.17.4"
+  }
+}

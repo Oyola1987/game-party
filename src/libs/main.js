@@ -1,6 +1,6 @@
 
-const COUNTDOWN = 2;
-const TIME_TO_RESPOND = 11;
+const COUNTDOWN = 10;
+const TIME_TO_RESPOND = 60;
 const range = _.range(21);
 
 let time;

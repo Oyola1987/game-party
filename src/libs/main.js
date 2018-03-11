@@ -1,6 +1,7 @@
 
 const COUNTDOWN = 2;
-const TIME_TO_RESPOND = 60;
+const TIME_TO_RESPOND = 11;
+const range = _.range(21);
 
 let time;
 let sound;
@@ -59,7 +60,6 @@ const getMovie = () => {
     const random = _.random(0, movies.length - 1);
     const name = movies[random];
     movies = _.without(movies, name);
-    
     return capitalizeFirstLetter(name);
 };
 
@@ -91,9 +91,10 @@ const countdown = (number, cb, end) => {
 
 const finishedMovie = (key, txt) => {
     setAudio(key);
+    const randomValue = _.random(0, range.length - 1);
     addToContent(
             `${txt}
-            <image class="mw-100" src="images/${key}.jpg" />
+            <image class="mw-100" src="images/${key}${randomValue}.jpg" />
             <div class="w-100 d-block mt-5"><button type="button" class="btn btn-secondary btn-lg" id="next">Siguiente</button></div>`
     );
     audioPlay();
@@ -102,13 +103,13 @@ const finishedMovie = (key, txt) => {
     });
 };
 
-const lostMovie = () => {
-    finishedMovie('lose', '<h2 class="text-danger mb-3">Has fallado</h2>');
+const lostMovie = (name) => {
+    finishedMovie('lose', '<h2 class="mb-3">' + name + '</h2><h2 class="text-danger mb-3">Has fallado</h2>');
 };
 
-const winMovie = () => {
+const winMovie = (name) => {
     clearTime();
-    finishedMovie('win', '<h2 class="text-success mb-3">Acertado</h2>');
+    finishedMovie('win', '<h2 class="mb-3">' + name + '</h2><h2 class="text-success mb-3">Acertado</h2>');
 };
 
 const showMovie = () => {
@@ -116,7 +117,9 @@ const showMovie = () => {
 
     addToContent('<h1>' + name + '</h1><div id="timer"></div><button type="button" class="btn btn-success btn-lg" id="win">Acertado</button>', name);
 
-    clickOnce('win', winMovie);
+    clickOnce('win', () => {
+        winMovie(name);
+    });
 
     setAudio('start');
     audioPlay();
@@ -131,8 +134,10 @@ const showMovie = () => {
             }
             audioPlay();
         }  
-        add('timer', '<h4 class="text-right mr-3">' + number + ' segundos</h4>');
-    }, lostMovie);
+        add('timer', '<h4 class="text-right mr-5">' + number + ' segundos</h4>');
+    }, () => {
+        lostMovie(name);
+    });
 };
 
 const waitToShow = () => {
@@ -141,7 +146,7 @@ const waitToShow = () => {
         if (number <= 5) {
             audioPlay();
         }        
-        addToContent('<h4>Se mostrar&aacute; en <strong>' + number + '</strong> segundos</h4>');
+        addToContent('<h4>Se mostrará en <strong>' + number + '</strong> segundos</h4>');
     }, showMovie);
 };
 
@@ -160,10 +165,9 @@ const finishedGame = () => {
 const startGame = () => {
     addToContent(
         `<button type="button" class="btn btn-secondary btn-lg" id="show">Show movie</button>
-            <div><p class="text-right mr-3">Quedan: ${movies.length}</p></div>`
+            <div><p class="text-right mr-5">Quedan: ${movies.length}</p></div>`
     );
     clickOnce('show', (el) => {
-        console.log('show');
         waitToShow();
     });
 };

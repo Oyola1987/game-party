@@ -1,6 +1,6 @@
 
 const COUNTDOWN = 2;
-const TIME_TO_RESPOND = 10;
+const TIME_TO_RESPOND = 60;
 
 let time;
 let sound;
@@ -14,6 +14,12 @@ const remove = (el) => {
     if (el) {
         el.remove();
     }
+};
+
+const add = (id, content) => {
+    _.each(document.querySelectorAll('#' + id), (el) => {
+        el.innerHTML = content;
+    });    
 };
 
 const setAudio = (src) => {
@@ -45,18 +51,27 @@ const clickOnce = (id, cb) => {
     el.focus();
 };
 
-const getMovie = () => {
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const getMovie = () => {    
     const random = _.random(0, movies.length - 1);
     const name = movies[random];
     movies = _.without(movies, name);
-
-    return name;
+    
+    return capitalizeFirstLetter(name);
 };
 
 
-const addToContent = (content) => {    
-    const el = document.getElementById("content");
-    el.innerHTML = content;
+const addToContent = (content, name) => {  
+    _.each(['', '-ext'], (key, index) => {
+        const el = document.getElementById("content" + key);
+        if (name && index === 1) {
+            content = content.replace(name, '******');
+        }
+        el.innerHTML = content;
+    });   
 };
 
 const countdown = (number, cb, end) => {
@@ -74,10 +89,11 @@ const countdown = (number, cb, end) => {
     counter(number);
 };
 
-const finishedMovie = (key) => {
+const finishedMovie = (key, txt) => {
     setAudio(key);
     addToContent(
-        `<image class="mw-100" src="images/${key}.jpg" />
+            `${txt}
+            <image class="mw-100" src="images/${key}.jpg" />
             <div class="w-100 d-block mt-5"><button type="button" class="btn btn-secondary btn-lg" id="next">Siguiente</button></div>`
     );
     audioPlay();
@@ -87,28 +103,35 @@ const finishedMovie = (key) => {
 };
 
 const lostMovie = () => {
-    finishedMovie('lose');
+    finishedMovie('lose', '<h2 class="text-danger mb-3">Has fallado</h2>');
 };
 
 const winMovie = () => {
     clearTime();
-    finishedMovie('win');
+    finishedMovie('win', '<h2 class="text-success mb-3">Acertado</h2>');
 };
 
 const showMovie = () => {
     const name = getMovie();
 
-    addToContent('<h2>' + name + '</h2><div id="timer"></div><button type="button" class="btn btn-success btn-lg" id="win">Acertado</button>');
-    const el = document.getElementById("timer");
+    addToContent('<h1>' + name + '</h1><div id="timer"></div><button type="button" class="btn btn-success btn-lg" id="win">Acertado</button>', name);
 
     clickOnce('win', winMovie);
 
-    setAudio('time_finished');
+    setAudio('start');
+    audioPlay();
+
     countdown(TIME_TO_RESPOND, (number) => {
-        if (number <= 10) {
+        if (number === 25) {
+            setAudio('time_pass');
+            audioPlay();
+        } else if (number <= 10) {
+            if (number === 10) {
+                setAudio('time_finished');
+            }
             audioPlay();
         }  
-        el.innerHTML = '<p class="text-right mr-3">' + number + ' segundos</p>';
+        add('timer', '<h4 class="text-right mr-3">' + number + ' segundos</h4>');
     }, lostMovie);
 };
 

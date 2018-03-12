@@ -56,7 +56,7 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const getMovie = () => {    
+const getItem = () => {    
     const random = _.random(0, list.length - 1);
     const name = list[random];
     list = _.without(list, name);
@@ -89,7 +89,7 @@ const countdown = (number, cb, end) => {
     counter(number);
 };
 
-const finishedMovie = (key, txt) => {
+const finishedItem = (key, txt) => {
     setAudio(key);
     const randomValue = _.random(0, range.length - 1);
     addToContent(
@@ -103,22 +103,22 @@ const finishedMovie = (key, txt) => {
     });
 };
 
-const lostMovie = (name) => {
-    finishedMovie('lose', '<h2 class="mb-3">' + name + '</h2><h2 class="text-danger mb-3">Has fallado</h2>');
+const lostItem = (name) => {
+    finishedItem('lose', '<h2 class="mb-3">' + name + '</h2><h2 class="text-danger mb-3">Has fallado</h2>');
 };
 
-const winMovie = (name) => {
+const winItem = (name) => {
     clearTime();
-    finishedMovie('win', '<h2 class="mb-3">' + name + '</h2><h2 class="text-success mb-3">Acertado</h2>');
+    finishedItem('win', '<h2 class="mb-3">' + name + '</h2><h2 class="text-success mb-3">Acertado</h2>');
 };
 
-const showMovie = () => {
-    const name = getMovie();
+const showItem = () => {
+    const name = getItem();
 
     addToContent('<h1>' + name + '</h1><div id="timer"></div><button type="button" class="btn btn-success btn-lg" id="win">Acertado</button>', name);
 
     clickOnce('win', () => {
-        winMovie(name);
+        winItem(name);
     });
 
     setAudio('start');
@@ -136,7 +136,7 @@ const showMovie = () => {
         }  
         add('timer', '<h4 class="text-right mr-5">' + number + ' segundos</h4>');
     }, () => {
-        lostMovie(name);
+        lostItem(name);
     });
 };
 
@@ -147,7 +147,7 @@ const waitToShow = () => {
             audioPlay();
         }        
         addToContent('<h4>Se mostrará en <strong>' + number + '</strong> segundos</h4>');
-    }, showMovie);
+    }, showItem);
 };
 
 const finishedGame = () => {
@@ -158,7 +158,7 @@ const finishedGame = () => {
     );
     audioPlay();
     clickOnce('reload', (el) => {
-        window.location.reload();
+        window.location.href = 'index.html';
     });
 };
 

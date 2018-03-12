@@ -1,11 +1,11 @@
 
-const COUNTDOWN = 10;
+const COUNTDOWN = 5;
 const TIME_TO_RESPOND = 60;
 const range = _.range(21);
 
 let time;
 let sound;
-let movies = window.movies;
+let list = window[window.location.hash.replace('#','')];
 
 const clearTime = () => {
     clearTimeout(time);
@@ -57,9 +57,9 @@ const capitalizeFirstLetter = (string) => {
 }
 
 const getMovie = () => {    
-    const random = _.random(0, movies.length - 1);
-    const name = movies[random];
-    movies = _.without(movies, name);
+    const random = _.random(0, list.length - 1);
+    const name = list[random];
+    list = _.without(list, name);
     return capitalizeFirstLetter(name);
 };
 
@@ -164,8 +164,8 @@ const finishedGame = () => {
 
 const startGame = () => {
     addToContent(
-        `<button type="button" class="btn btn-secondary btn-lg" id="show">Show movie</button>
-            <div><p class="text-right mr-5">Quedan: ${movies.length}</p></div>`
+        `<button type="button" class="btn btn-secondary btn-lg" id="show">Show title</button>
+            <div><p class="text-right mr-5">Quedan: ${list.length}</p></div>`
     );
     clickOnce('show', (el) => {
         waitToShow();
@@ -173,22 +173,16 @@ const startGame = () => {
 };
 
 const selectBtn = (content) => {
-    if (movies.length) {
+    if (list.length) {
         startGame();
     } else {
         finishedGame();
     }    
 };
 
-const start = () => {
-    console.log('start clicked');
-    remove(document.getElementById('title'));
-    selectBtn();
-};
-
 document.addEventListener('DOMContentLoaded', () => {
     clickOnce('start', (el) => {
-        start();
+        selectBtn();
     });
 
 }, false);

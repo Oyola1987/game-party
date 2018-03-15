@@ -250,6 +250,18 @@ window.movies = [
     "Sonrisas y Lágrimas",
     "Moulin Rouge",
     "Dirty Dancing",
-    "Brokeback Mountain"
+    "Brokeback Mountain",
+    "Friends;",
+    "Juego de Tronos",
+    "Perdidos",
+    "Expediente-X",
+    "Los Simpsons",
+    "Star Trek",
+    "Dragon Ball",
+    "Urgencias",
+    "Breaking Bad",
+    "Sexo en Nueva York",
+    "Los Picapiedra",
+    "Futurama"
 ];
 

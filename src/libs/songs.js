@@ -125,6 +125,12 @@ window.songs = [
     "The Rolling Stones (Doom And Gloom)",
     "Beyoncé (Run the World (Girls))",
     "Nicki Minaj (Super Bass)",
-    "Music (Madonna)"
+    "Music (Madonna)",
+    "Corazón partío (Alejandro Sanz)",
+    "Soldadito marinero (Fito y fitipaldis)",
+    "Amiga mía (Alejandro Sanz)",
+    "Hijo de la luna (Mecano)",
+    ""
+
 ];
 

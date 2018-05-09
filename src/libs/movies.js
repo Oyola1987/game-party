@@ -279,48 +279,27 @@ window.movies = [
     "Salvar al soldado Ryan",
     "Enemigo a las puertas",
     "Stranger things",
-    "Jessica Jones",
     "Los 100",
     "Indiana Jones",
-    "Rick y Morty",
     "Transporter",
-    "John Wick",
-    "Dunkerque",
     "Interstellar",
     "Tomb Raider",
     "El lado bueno de las cosas",
     "La bruja novata",
-    "La niebla",
     "La familia adams",
     "Naufrago",
-    "Sally",
-    "Un pez llamado wanda",
     "La gran evasión",
-    "Invictus",
     "Lo imposible",
-    "The artist",
-    "La familia Berlier",
     "La isla", 
     "los vengadores",
     "Big",
     "El lago azul",
     "Ben hur",
     "El coleccionista de huesos",
-    "Salt",
-    "1, 2, 3 splash",
     "Esta casa es una ruina",
-    "Birdman",
-    "Begin again",
     "El diario de noah",
     "Destino final",
     "Poltergeist",
-    "El octubre rojo",
-    "La hija del general",
     "Bob esponja"
-
-
-
-
-
 ];
 
